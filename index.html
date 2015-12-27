@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<head>
+	<meta http-equiv="content-type" content="text/html" />
+	<meta name="author" content="lolkittens" />
+
+	<title>Angular JS Sudoku application</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/sudoku.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers.js"> </script>
+</head>
+
+<body>
+	<div ng-app="sudoku" ng-controller="boardcontroller" class="container">
+		<div class="row">
+			<p class="col-md-10 center-block">
+				Fill in the grid with any valid starting sudoku configuraion and then press the solve button to 
+				generate a correct solution. The application uses a simple backtracking algorithm and search pruning to 
+				generate the final answer. Official sudoku puzzles typically have one valid solution but it is possible
+				to have more than one for many configurations. Our implementation stops once any valid solution is encountered.
+			</p>
+		</div>
+		<div class="row">
+			<form role="form" class="col-md-10 center-block">
+				<div ng-repeat="row in [0,1,2,3,4,5,6,7,8]" class="row">
+					<div ng-repeat="column in [0,1,2,3,4,5,6,7,8]" class="col-sm-1 no-padding">
+						<input type="text" class="form-control" ng-model="puzzle.board[row][column]" name="cell[]">
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="row">
+			<button type="button" class="btn btn-primary" ng-click="initialize()">Initialize</button>
+			<button type="button" class="btn btn-success" ng-click = "solve()">Solve</button>
+			<button type="button" class="btn btn-info">Show valid moves</button>
+		</div>	
+	</div>
+
+
+</body>
+</html>
