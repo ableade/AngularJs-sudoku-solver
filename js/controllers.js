@@ -57,6 +57,7 @@ app.controller('boardcontroller', function($scope) {
 			return true;
 		} else {
 			candidateCell = getCandidateCell(board);
+			console.log('candidate cell is before backtrack is ' + candidateCell.row + ' ' + candidateCell.column);
 			if(candidateCell != null) {
 				candidates = getPossibleCandidateValues(board, candidateCell);
 				if(!candidates.length) {
