@@ -33,7 +33,6 @@ app.controller('boardcontroller', function($scope) {
 			board[row][column] = value;
 		}
 		function unplace (board, row, column) {
-			console.log("Unplacing board at " + row +' and ' + column);
 			board[row][column] = undefined;
 		}
 		$scope.solve = function () {
@@ -54,26 +53,19 @@ app.controller('boardcontroller', function($scope) {
 		var candidateCell;
 		var candidates;
 		if(k== n) {
-			console.log('puzzle is complete');
 			$scope.puzzle.board = board;
 			return true;
 		} else {
 			candidateCell = getCandidateCell(board);
-			console.log('candidate cell is before backtrack is ' + candidateCell.row + ' ' + candidateCell.column);
 			if(candidateCell != null) {
 				candidates = getPossibleCandidateValues(board, candidateCell);
 				if(!candidates.length) {
-					console.log('No more candidates exist');
 					return false;
 				}
 				++k;
 				for(var i =0; i< candidates.length; i++) {
-					console.log('backtrack count is is ' + i);
 					place(board, candidateCell.row, candidateCell.column, candidates[i])
-					console.log("candidates were " + candidates);
 					if(!solveBoard(board, k, n)) {
-						console.log('board is ' + board);
-						console.log("We should backtrack here" );
 						//backtrack if there are no possible values for the current candidate cell
 						unplace(board, candidateCell.row, candidateCell.column);	
 					}			
