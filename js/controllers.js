@@ -45,36 +45,36 @@ app.controller('boardcontroller', function($scope) {
 			}
 		}
 		k=0;
-		board = $scope.puzzle.board;
-		solveBoard(board, k, emptyCount);
+		solveBoard($scope.puzzle.board, k, emptyCount);
 	}
 
 	function solveBoard (board, k, n) {
+		console.log('k count is ' + k);
 		var candidateCell;
 		var candidates;
-		if(k== n) {
-			$scope.puzzle.board = board;
+		candidateCell = getCandidateCell(board);
+		if(k==n) {
+			console.log("Puzzle has been solved");
 			return true;
-		} else {
-			candidateCell = getCandidateCell(board);
-			console.log('candidate cell is before backtrack is ' + candidateCell.row + ' ' + candidateCell.column);
-			if(candidateCell != null) {
-				candidates = getPossibleCandidateValues(board, candidateCell);
-				if(!candidates.length) {
-					return false;
-				}
-				++k;
-				for(var i =0; i< candidates.length; i++) {
-					place(board, candidateCell.row, candidateCell.column, candidates[i])
-					if(!solveBoard(board, k, n)) {
+		}
+		else{
+			candidates = getPossibleCandidateValues(board, candidateCell);
+			if(!candidates.length) {
+				return false;
+			}
+			++k;
+			for(var i =0; i< candidates.length; i++) {
+				place(board, candidateCell.row, candidateCell.column, candidates[i])
+				if(!solveBoard(board, k, n)) {
 						//backtrack if there are no possible values for the current candidate cell
 						unplace(board, candidateCell.row, candidateCell.column);	
-					}			
+					} else {
+						return true;
+					}		
 				}
 			}
+			return false;
 		}
-		return false;
-	}
 	/**
 	Determines the square grid that a particular 
 	candidate row belongs to
