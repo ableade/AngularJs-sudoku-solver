@@ -49,7 +49,6 @@ app.controller('boardcontroller', function($scope) {
 	}
 
 	function solveBoard (board, k, n) {
-		console.log('k count is ' + k);
 		var candidateCell;
 		var candidates;
 		candidateCell = getCandidateCell(board);
